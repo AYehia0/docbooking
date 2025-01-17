@@ -33,11 +33,10 @@ func (h *HTTPAvailabilityHandler) GetDoctorAvailabilitySlots(w http.ResponseWrit
 	// Fetch slots
 	slots, err := h.availabilityService.GetDoctorAvailabilitySlots(doctorID)
 	if err != nil {
-		http.Error(w, err.Error(), http.StatusInternalServerError)
+		w.WriteHeader(http.StatusNoContent)
 		return
 	}
 
-	// Respond with JSON
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(slots)
 }

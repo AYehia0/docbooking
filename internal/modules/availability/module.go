@@ -25,6 +25,11 @@ func NewAvailabilityModule(eventBus *event.Bus, logger *logger.Logger) *Availabi
 	mux.HandleFunc("GET /{doctor_id}/", availabilityHandler.GetDoctorAvailabilitySlots)
 	mux.HandleFunc("POST /{doctor_id}/", availabilityHandler.AddDoctorAvailabilitySlots)
 
+	// log the endpoints
+	logger.Info("Availability module is mounted on /availabilities")
+	logger.Info("GET /{doctor_id}/")
+	logger.Info("POST /{doctor_id}/")
+
 	// Register the event handlers
 	registerAvailabilityEvents(eventBus, availabilityService, logger)
 

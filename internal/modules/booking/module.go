@@ -29,6 +29,9 @@ func NewBookModule(eventBus *event.Bus, logger *logger.Logger) *BookModule {
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /{doctor_id}/", bookingHandler.BookSlot)
 
+	logger.Info("Booking module is mounted on /booking")
+	logger.Info("POST /{doctor_id}/")
+
 	return &BookModule{
 		Handler: mux,
 		bus:     eventBus,
