@@ -4,6 +4,7 @@ import (
 	"docbooking/internal/modules/appointment"
 	"docbooking/internal/modules/availability"
 	"docbooking/internal/modules/booking"
+	"docbooking/internal/modules/confirmation"
 	"docbooking/pkg/event"
 	"docbooking/pkg/logger"
 	"net/http"
@@ -18,6 +19,10 @@ func main() {
 	availabilityModule := availability.NewAvailabilityModule(eventBus, log)
 	bookingModule := booking.NewBookModule(eventBus, log)
 	appointmentModule := appointment.NewAppointmentModule(eventBus, log)
+
+	// for confirmation/notification
+	confirmationModule := confirmation.NewConfirmationModule(eventBus, log)
+	confirmationModule.RegisterEventListeners()
 
 	// initializing the server
 	mux := http.NewServeMux()
