@@ -7,20 +7,24 @@ import (
 	"github.com/google/uuid"
 )
 
-type service struct {
+type Service struct {
 	repo port.AppointmentRepo
 }
 
-func NewAppointmentService(repo port.AppointmentRepo) *service {
-	return &service{
+func NewAppointmentService(repo port.AppointmentRepo) *Service {
+	return &Service{
 		repo: repo,
 	}
 }
 
-func (s *service) GetDoctorAppointments(doctorID uuid.UUID) ([]domain.Appointment, error) {
+func (s *Service) GetDoctorAppointments(doctorID uuid.UUID) ([]domain.Appointment, error) {
 	return s.repo.GetDoctorAppointments(doctorID)
 }
 
-func (s *service) UpdateAppointmentStatus(appointmentID uuid.UUID, status domain.AppointmentStatus) error {
+func (s *Service) UpdateAppointmentStatus(appointmentID uuid.UUID, status domain.AppointmentStatus) error {
 	return s.repo.UpdateAppointmentStatus(appointmentID, status)
+}
+
+func (s *Service) AddAppointment(appointment domain.Appointment) error {
+	return s.repo.AddAppointment(appointment)
 }

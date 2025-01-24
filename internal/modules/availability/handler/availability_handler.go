@@ -68,8 +68,6 @@ func (h *HTTPAvailabilityHandler) AddDoctorAvailabilitySlots(w http.ResponseWrit
 		return
 	}
 
-	slot.DoctorID = doctorID
-
 	// Add slot
 	err = h.availabilityService.AddDoctorAvailabilitySlots(doctorID, slot)
 	if err != nil {

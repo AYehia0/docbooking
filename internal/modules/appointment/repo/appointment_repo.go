@@ -35,3 +35,8 @@ func (r *appointmentRepo) UpdateAppointmentStatus(appointmentID uuid.UUID, statu
 	}
 	return nil
 }
+
+func (r *appointmentRepo) AddAppointment(appointment domain.Appointment) error {
+	r.appointments[appointment.DoctorID.String()] = append(r.appointments[appointment.DoctorID.String()], appointment)
+	return nil
+}

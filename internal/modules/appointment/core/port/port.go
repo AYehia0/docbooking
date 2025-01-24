@@ -10,10 +10,12 @@ import (
 type AppointmentRepo interface {
 	GetDoctorAppointments(doctorID uuid.UUID) ([]domain.Appointment, error)
 	UpdateAppointmentStatus(appointmentID uuid.UUID, status domain.AppointmentStatus) error
+	AddAppointment(appointment domain.Appointment) error
 }
 
 // The service port
 type AppointmentService interface {
 	GetDoctorAppointments(doctorID uuid.UUID) ([]domain.Appointment, error)
 	UpdateAppointmentStatus(appointmentID uuid.UUID, status domain.AppointmentStatus) error
+	AddAppointment(appointment domain.Appointment) error
 }

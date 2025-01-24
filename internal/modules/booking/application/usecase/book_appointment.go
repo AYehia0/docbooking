@@ -16,6 +16,6 @@ func NewBookAppointmentUseCase(appointmentService *service.AppointmentService) *
 	}
 }
 
-func (uc *BookAppointmentUseCase) Execute(slotID, patientID uuid.UUID, patientName string) error {
-	return uc.appointmentService.BookAppointment(slotID, patientID, patientName)
+func (uc *BookAppointmentUseCase) Execute(slotID, doctorID, patientID uuid.UUID, patientName string) error {
+	return uc.appointmentService.BookAppointment(slotID, doctorID, patientID, patientName)
 }

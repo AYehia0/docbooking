@@ -11,6 +11,9 @@ type Appointment struct {
 	ID          uuid.UUID
 	SlotID      uuid.UUID
 	PatientID   uuid.UUID
+	DoctorID    uuid.UUID
+	StartTime   time.Time
+	EndTime     time.Time
 	PatientName string
 	ReservedAt  time.Time
 }

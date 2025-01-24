@@ -17,18 +17,24 @@ type BookModule struct {
 
 func NewBookModule(eventBus *event.Bus, logger *logger.Logger) *BookModule {
 	bookingRepo := db.NewAppointmentRepo()
-	bookingService := service.NewAppointmentService(bookingRepo, eventBus)
+	availabilityRepo := db.NewAvailabilityRepo()
+
+	bookingService := service.NewAppointmentService(bookingRepo, availabilityRepo, eventBus)
+	availabilityService := service.NewAvailabilityService(availabilityRepo, eventBus)
 
 	uc := &usecase.UseCases{
 		GetAppointmentsUseCase: usecase.NewGetAppointmentsUseCase(bookingService),
 		BookAppointmentUseCase: usecase.NewBookAppointmentUseCase(bookingService),
+		AddSlotUseCase:         usecase.NewAddSlotUseCase(availabilityService),
 	}
 
 	bookingHandler := handler.NewHTTPBookingHandler(uc)
 
 	registerEvents(eventBus, logger, uc)
+
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /{doctor_id}/", bookingHandler.BookSlot)
+	mux.HandleFunc("GET /{doctor_id}/", bookingHandler.GetDoctorAppointments)
 
 	logger.Info("Booking module is mounted on /booking")
 	logger.Info("POST /{doctor_id}/")

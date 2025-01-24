@@ -1,7 +1,6 @@
 package service
 
 import (
-	"docbooking/internal/modules/availability/events"
 	"docbooking/internal/modules/availability/model"
 	"docbooking/internal/modules/availability/repo"
 	"docbooking/pkg/event"
@@ -30,14 +29,20 @@ func (s *AvailabilityService) GetDoctorAvailabilitySlots(doctorID uuid.UUID) ([]
 
 // The doctor can add his availability slots
 func (s *AvailabilityService) AddDoctorAvailabilitySlots(doctorID uuid.UUID, slot model.Slot) error {
+	// TODO: ugly for now
+	slot.ID = uuid.New()
+	slot.DoctorID = doctorID
+	slot.IsReserved = false
+	slot.DoctorName = "Dr. John Doe"
+
 	err := s.availabilityRepo.AddDoctorAvailabilitySlot(doctorID, slot)
 
 	if err == nil {
 		s.bus.Publish(event.Event{
 			Name: "availability.slot.created",
-			Payload: events.CreateSlotEvent{
+			Payload: event.CreateSlotEvent{
 				DoctorID: doctorID,
-				Slot:     slot,
+				Slot:     event.Slot(slot),
 			},
 		})
 	}
