@@ -25,7 +25,13 @@ func NewConfirmationModule(eventBus *event.Bus, log *logger.Logger) *Confirmatio
 }
 
 func (m *ConfirmationModule) RegisterEventListeners() {
-	m.bus.Subscribe("confirmation.notification", m.SendNotification)
+	m.bus.Subscribe("booking.appointment.booked", func(e event.Event) {
+		m.log.Info("Received booking.appointment.booked event in the confirmation module: sending notification to the doctor")
+	})
+
+	m.bus.Subscribe("booking.appointment.cancelled", func(e event.Event) {
+		m.log.Info("Received booking.appointment.cancelled event in the confirmation module: sending notification to the patient")
+	})
 }
 
 func (m *ConfirmationModule) SendNotification(e event.Event) {

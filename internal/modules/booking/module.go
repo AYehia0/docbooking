@@ -26,6 +26,7 @@ func NewBookModule(eventBus *event.Bus, logger *logger.Logger) *BookModule {
 
 	bookingHandler := handler.NewHTTPBookingHandler(uc)
 
+	registerEvents(eventBus, logger, uc)
 	mux := http.NewServeMux()
 	mux.HandleFunc("POST /{doctor_id}/", bookingHandler.BookSlot)
 
@@ -36,4 +37,14 @@ func NewBookModule(eventBus *event.Bus, logger *logger.Logger) *BookModule {
 		Handler: mux,
 		bus:     eventBus,
 	}
+}
+
+func registerEvents(eventBus *event.Bus, logger *logger.Logger, uc *usecase.UseCases) {
+	eventBus.Subscribe("availability.slot.created", func(e event.Event) {
+		slot := e.Payload.(event.CreateSlotEvent).Slot
+		logger.Infof("Received availability.slot.created event: adding the slot as an appointment in the booking module: %v", slot)
+
+		// TODO: handle errors
+		uc.AddSlotUseCase.Execute(slot.DoctorID, slot.StartTime, slot.EndTime)
+	})
 }
