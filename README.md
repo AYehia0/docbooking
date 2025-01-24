@@ -1,4 +1,5 @@
 # Docbooking
+![](./.assets/modular_monolith_docbooking.svg)
 A very simple appointment booking system for doctors and patients in a monolithic architecture.
 
 Meaning it's simple does't mean it's good!:
