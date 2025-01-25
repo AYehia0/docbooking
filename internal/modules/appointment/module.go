@@ -22,8 +22,9 @@ func NewAppointmentModule(eventBus *event.Bus, logger *logger.Logger) *Appointme
 
 	mux := http.NewServeMux()
 
-	mux.HandleFunc("GET /{doctor_id}/", appointmentHandler.GetDoctorAppointments)
-	mux.HandleFunc("PUT /{appointment_id}/status/", appointmentHandler.UpdateAppointmentStatus)
+	// Define the renamed patterns
+	mux.HandleFunc("GET /", appointmentHandler.GetDoctorAppointments)
+	mux.HandleFunc("PUT /", appointmentHandler.UpdateAppointmentStatus)
 
 	registerEvents(eventBus, logger, appointmentService)
 

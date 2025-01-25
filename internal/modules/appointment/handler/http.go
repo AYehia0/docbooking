@@ -4,8 +4,8 @@ import (
 	"docbooking/internal/modules/appointment/core/domain"
 	"docbooking/internal/modules/appointment/core/port"
 	"encoding/json"
+	"fmt"
 	"net/http"
-	"strings"
 
 	"github.com/google/uuid"
 )
@@ -21,8 +21,8 @@ func NewAppointmentHandler(service port.AppointmentService) *AppointmentHandler 
 }
 
 func (h *AppointmentHandler) GetDoctorAppointments(w http.ResponseWriter, r *http.Request) {
-	id := strings.Split(r.URL.Path, "/")[2]
-	doctorID, err := uuid.Parse(id)
+	fmt.Println("GetDoctorAppointments")
+	doctorID, err := uuid.Parse(r.URL.Query().Get("doctor_id"))
 	if err != nil {
 		http.Error(w, "invalid doctor_id", http.StatusBadRequest)
 		return
@@ -43,18 +43,14 @@ func (h *AppointmentHandler) GetDoctorAppointments(w http.ResponseWriter, r *htt
 }
 
 func (h *AppointmentHandler) UpdateAppointmentStatus(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("UpdateAppointmentStatus")
 	var req struct {
-		Status string `json:"status"`
+		AppointmentID uuid.UUID `json:"appointment_id"`
+		Status        string    `json:"status"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		http.Error(w, err.Error(), http.StatusBadRequest)
-		return
-	}
-
-	appointmentID, err := extractAppointmentID(r.URL.Path)
-	if err != nil {
-		http.Error(w, "invalid appointment_id", http.StatusBadRequest)
 		return
 	}
 
@@ -68,18 +64,10 @@ func (h *AppointmentHandler) UpdateAppointmentStatus(w http.ResponseWriter, r *h
 	// convert req.Status to port.AppointmentStatus
 	st := domain.AppointmentStatus(req.Status)
 
-	if err := h.service.UpdateAppointmentStatus(appointmentID, st); err != nil {
+	if err := h.service.UpdateAppointmentStatus(req.AppointmentID, st); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
 	w.WriteHeader(http.StatusNoContent)
-}
-
-func extractAppointmentID(path string) (uuid.UUID, error) {
-	parts := strings.Split(strings.Trim(path, "/"), "/")
-	if len(parts) < 2 || parts[0] != "appointments" {
-		return uuid.Nil, http.ErrNotSupported
-	}
-	return uuid.Parse(parts[1])
 }
