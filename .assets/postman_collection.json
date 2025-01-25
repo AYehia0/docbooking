@@ -80,7 +80,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"slot_id\": \"2ab49c8a-e6a4-429b-b490-b6613e4c1830\",\n    \"patient_id\": \"9c7c18d2-4321-4a69-b231-0dfb3b69b003\",\n    \"patient_name\": \"John Doe\"\n}",
+							"raw": "{\n    \"slot_id\": \"60f7d763-7fc8-417a-9d8e-c7d6f3742425\",\n    \"patient_id\": \"9c7c18d2-4321-4a69-b231-0dfb3b69b003\",\n    \"patient_name\": \"John Doe\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -155,17 +155,15 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "localhost:8080/appointments/:doctor_id/",
+							"raw": "localhost:8080/appointments?doctor_id=123e4567-e89b-12d3-a456-426614174000",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
-								"appointments",
-								":doctor_id",
-								""
+								"appointments"
 							],
-							"variable": [
+							"query": [
 								{
 									"key": "doctor_id",
 									"value": "123e4567-e89b-12d3-a456-426614174000"
@@ -182,7 +180,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"status\": \"completed\"\n}",
+							"raw": "{\n    \"appointment_id\": \"522edd8b-50cc-4fc4-8b73-693042217f94\",\n    \"status\": \"completed\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,21 +188,14 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/appointments/:appointment_id/",
+							"raw": "localhost:8080/appointments/",
 							"host": [
 								"localhost"
 							],
 							"port": "8080",
 							"path": [
 								"appointments",
-								":appointment_id",
 								""
-							],
-							"variable": [
-								{
-									"key": "appointment_id",
-									"value": "0ab655ce-1524-40e4-b69e-e477c2ca4e9c"
-								}
 							]
 						}
 					},
