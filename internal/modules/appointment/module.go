@@ -29,8 +29,8 @@ func NewAppointmentModule(eventBus *event.Bus, logger *logger.Logger) *Appointme
 	registerEvents(eventBus, logger, appointmentService)
 
 	logger.Info("Appointment module is mounted on /appointments")
-	logger.Info("GET /{doctor_id}")
-	logger.Info("PUT /{appointment_id}/status")
+	logger.Info("GET ?doctor_id={doctor_id}")
+	logger.Info("PUT /")
 
 	return &AppointmentModule{
 		Handler: mux,
