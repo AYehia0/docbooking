@@ -4,10 +4,9 @@ import (
 	"docbooking/internal/modules/booking/domain/entity"
 	"docbooking/internal/modules/booking/domain/repo"
 	"docbooking/pkg/event"
+	"docbooking/pkg/uuid"
 	"errors"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type AppointmentService struct {
@@ -30,12 +29,8 @@ func (s *AppointmentService) BookAppointment(slotID, doctorID, patientID uuid.UU
 		return errors.New("slot is already booked")
 	}
 
-	appointmentId, err := uuid.NewRandom()
-	if err != nil {
-		return err
-	}
 	appointment := entity.Appointment{
-		ID:          appointmentId,
+		ID:          uuid.NewRandom(),
 		SlotID:      slotID,
 		PatientID:   patientID,
 		DoctorID:    doctorID,

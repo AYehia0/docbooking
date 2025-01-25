@@ -3,8 +3,7 @@ package appointmentservice
 import (
 	"docbooking/internal/modules/appointment/core/domain"
 	"docbooking/internal/modules/appointment/core/port"
-
-	"github.com/google/uuid"
+	"docbooking/pkg/uuid"
 )
 
 type Service struct {

@@ -4,9 +4,8 @@ package repo
 
 import (
 	"docbooking/internal/modules/availability/model"
+	"docbooking/pkg/uuid"
 	"errors"
-
-	"github.com/google/uuid"
 )
 
 type AvailabilityRepository interface {

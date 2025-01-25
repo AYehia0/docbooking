@@ -1,9 +1,8 @@
 package domain
 
 import (
+	"docbooking/pkg/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 // Appointment represents a booking appointment entity.

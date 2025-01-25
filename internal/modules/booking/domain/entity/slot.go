@@ -1,9 +1,8 @@
 package entity
 
 import (
+	"docbooking/pkg/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 // The Slot entity represents a time slot for a doctor's availability, should be the same as the one in availability module,

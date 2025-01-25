@@ -2,9 +2,8 @@ package repo
 
 import (
 	"docbooking/internal/modules/booking/domain/entity"
+	"docbooking/pkg/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type AvailabilityRepo interface {

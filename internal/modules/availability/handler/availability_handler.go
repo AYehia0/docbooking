@@ -3,12 +3,11 @@ package handler
 import (
 	"docbooking/internal/modules/availability/model"
 	"docbooking/internal/modules/availability/service"
+	"docbooking/pkg/uuid"
 	"encoding/json"
 	"net/http"
 	"strings"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type HTTPAvailabilityHandler struct {

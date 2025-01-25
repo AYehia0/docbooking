@@ -1,9 +1,8 @@
 package event
 
 import (
+	"docbooking/pkg/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type Event struct {

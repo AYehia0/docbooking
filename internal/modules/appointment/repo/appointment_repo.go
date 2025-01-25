@@ -2,8 +2,7 @@ package repo
 
 import (
 	"docbooking/internal/modules/appointment/core/domain"
-
-	"github.com/google/uuid"
+	"docbooking/pkg/uuid"
 )
 
 type appointmentRepo struct {

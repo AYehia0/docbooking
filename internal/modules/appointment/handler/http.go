@@ -3,11 +3,10 @@ package handler
 import (
 	"docbooking/internal/modules/appointment/core/domain"
 	"docbooking/internal/modules/appointment/core/port"
+	"docbooking/pkg/uuid"
 	"encoding/json"
 	"fmt"
 	"net/http"
-
-	"github.com/google/uuid"
 )
 
 type AppointmentHandler struct {

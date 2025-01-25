@@ -2,8 +2,7 @@ package usecase
 
 import (
 	"docbooking/internal/modules/booking/domain/service"
-
-	"github.com/google/uuid"
+	"docbooking/pkg/uuid"
 )
 
 type BookAppointmentUseCase struct {

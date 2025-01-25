@@ -4,12 +4,11 @@ package handler
 
 import (
 	"docbooking/internal/modules/booking/application/usecase"
+	"docbooking/pkg/uuid"
 	"encoding/json"
 	"fmt"
 	"net/http"
 	"strings"
-
-	"github.com/google/uuid"
 )
 
 type BookingHandler struct {

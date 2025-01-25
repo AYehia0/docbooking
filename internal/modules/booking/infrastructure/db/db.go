@@ -2,10 +2,9 @@ package db
 
 import (
 	"docbooking/internal/modules/booking/domain/entity"
+	"docbooking/pkg/uuid"
 	"fmt"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type AppointmentRepo struct {

@@ -1,9 +1,8 @@
 package handler
 
 import (
+	"docbooking/pkg/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type BookingRequest struct {

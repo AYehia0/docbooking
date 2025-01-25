@@ -4,9 +4,8 @@ import (
 	"docbooking/internal/modules/booking/domain/entity"
 	"docbooking/internal/modules/booking/domain/repo"
 	"docbooking/pkg/event"
+	"docbooking/pkg/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type AvailabilityService struct {

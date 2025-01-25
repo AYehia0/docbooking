@@ -2,7 +2,7 @@ package repo
 
 import (
 	"docbooking/internal/modules/booking/domain/entity"
-	"github.com/google/uuid"
+	"docbooking/pkg/uuid"
 )
 
 type AppointmentRepo interface {

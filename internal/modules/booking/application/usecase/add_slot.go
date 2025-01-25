@@ -2,9 +2,8 @@ package usecase
 
 import (
 	"docbooking/internal/modules/booking/domain/service"
+	"docbooking/pkg/uuid"
 	"time"
-
-	"github.com/google/uuid"
 )
 
 type AddSlotUseCase struct {
