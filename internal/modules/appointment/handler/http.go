@@ -44,8 +44,7 @@ func (h *AppointmentHandler) GetDoctorAppointments(w http.ResponseWriter, r *htt
 
 func (h *AppointmentHandler) UpdateAppointmentStatus(w http.ResponseWriter, r *http.Request) {
 	var req struct {
-		AppointmentID string `json:"appointment_id"`
-		Status        string `json:"status"`
+		Status string `json:"status"`
 	}
 
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
@@ -53,7 +52,7 @@ func (h *AppointmentHandler) UpdateAppointmentStatus(w http.ResponseWriter, r *h
 		return
 	}
 
-	appointmentID, err := uuid.Parse(req.AppointmentID)
+	appointmentID, err := extractAppointmentID(r.URL.Path)
 	if err != nil {
 		http.Error(w, "invalid appointment_id", http.StatusBadRequest)
 		return
@@ -75,4 +74,12 @@ func (h *AppointmentHandler) UpdateAppointmentStatus(w http.ResponseWriter, r *h
 	}
 
 	w.WriteHeader(http.StatusNoContent)
+}
+
+func extractAppointmentID(path string) (uuid.UUID, error) {
+	parts := strings.Split(strings.Trim(path, "/"), "/")
+	if len(parts) < 2 || parts[0] != "appointments" {
+		return uuid.Nil, http.ErrNotSupported
+	}
+	return uuid.Parse(parts[1])
 }
