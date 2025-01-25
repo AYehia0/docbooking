@@ -1,0 +1,216 @@
+{
+	"info": {
+		"_postman_id": "d01664bd-c5e9-472b-ba00-010f902c2ae7",
+		"name": "DocBooking",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20745767"
+	},
+	"item": [
+		{
+			"name": "Availablitlity",
+			"item": [
+				{
+					"name": "Get Doctor Availabitities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/availabilities/:doctor_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"availabilities",
+								":doctor_id"
+							],
+							"variable": [
+								{
+									"key": "doctor_id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add available slot",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"start_time\": \"2025-09-10T09:00:00Z\",\n  \"end_time\": \"2025-09-10T10:00:00Z\",\n  \"is_available\": true,\n  \"cost\": 100\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/availabilities/:doctor_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"availabilities",
+								":doctor_id"
+							],
+							"variable": [
+								{
+									"key": "doctor_id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Booking",
+			"item": [
+				{
+					"name": "Book an appointment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"slot_id\": \"2ab49c8a-e6a4-429b-b490-b6613e4c1830\",\n    \"patient_id\": \"9c7c18d2-4321-4a69-b231-0dfb3b69b003\",\n    \"patient_name\": \"John Doe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/booking/:doctor_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"booking",
+								":doctor_id"
+							],
+							"variable": [
+								{
+									"key": "doctor_id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Availabilities to book",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"slot_id\": \"9c7c18d2-4321-4a69-b231-0dfb3b69b000\",\n    \"patient_id\": \"9c7c18d2-4321-4a69-b231-0dfb3b69b003\",\n    \"patient_name\": \"John Doe\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/booking/:doctor_id",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"booking",
+								":doctor_id"
+							],
+							"variable": [
+								{
+									"key": "doctor_id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Appointment",
+			"item": [
+				{
+					"name": "Get doctor's appointments",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8080/appointments/:doctor_id/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"appointments",
+								":doctor_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "doctor_id",
+									"value": "123e4567-e89b-12d3-a456-426614174000"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Mark appointment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"status\": \"completed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/appointments/:appointment_id/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"appointments",
+								":appointment_id",
+								""
+							],
+							"variable": [
+								{
+									"key": "appointment_id",
+									"value": "0ab655ce-1524-40e4-b69e-e477c2ca4e9c"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
