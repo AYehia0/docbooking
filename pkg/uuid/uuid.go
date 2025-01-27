@@ -56,3 +56,19 @@ func (uuid UUID) String() string {
 func (uuid UUID) MarshalJSON() ([]byte, error) {
 	return []byte(fmt.Sprintf(`"%s"`, uuid.String())), nil
 }
+
+// UnmarshalJSON unmarshals a JSON-encoded UUID string
+func (uuid *UUID) UnmarshalJSON(data []byte) error {
+	// Trim the surrounding quotes from the JSON string
+	s := strings.Trim(string(data), `"`)
+
+	// Parse the UUID string
+	parsedUUID, err := Parse(s)
+	if err != nil {
+		return err
+	}
+
+	// Copy the parsed UUID into the current UUID
+	*uuid = parsedUUID
+	return nil
+}
